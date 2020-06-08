@@ -1,13 +1,14 @@
 package by.itra.tasks.task3.utils;
 
+import by.itra.tasks.task3.utils.validator.StringParametersValidator;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ParametersValidatorTest {
+public class StringParametersValidatorTest {
 
-    private ParametersValidator validator;
+    private StringParametersValidator validator;
     private String[] params1;
     String[] params2;
     String[] params3;
@@ -17,7 +18,7 @@ public class ParametersValidatorTest {
 
     @Before
     public void initTestParameters() {
-        this.validator = new ParametersValidator();
+        this.validator = new StringParametersValidator();
         params1 = new String[] {"one", "two"};
         params2 = new String[] {"one", "two", "two"};
         params3 = new String[] {"one", "two", "Two"};
