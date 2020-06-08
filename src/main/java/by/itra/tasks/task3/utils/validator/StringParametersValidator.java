@@ -1,8 +1,9 @@
-package by.itra.tasks.task3.utils;
+package by.itra.tasks.task3.utils.validator;
 
 import java.util.Arrays;
 
-public class ParametersValidator {
+public class StringParametersValidator implements Validator<String> {
+    @Override
     public boolean isValid(String[] params) {
         if (params.length % 2 == 0 || params.length < 3) {
             System.out.println("Incorrect count of parameters.");
