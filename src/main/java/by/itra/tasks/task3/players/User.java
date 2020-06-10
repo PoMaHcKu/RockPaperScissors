@@ -17,6 +17,8 @@ public class User extends Player {
             selectedIndex = Integer.parseInt(reader.readLine());
             if (selectedIndex < 0 || selectedIndex > moves.length) {
                 throw new IOException();
+            } else if (selectedIndex == 0) {
+                return;
             }
             selectedMove = moves[selectedIndex - 1];
         } catch (IOException | NumberFormatException e) {
