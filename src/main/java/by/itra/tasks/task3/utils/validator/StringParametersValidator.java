@@ -1,18 +1,17 @@
 package by.itra.tasks.task3.utils.validator;
 
+import java.security.InvalidParameterException;
 import java.util.Arrays;
 
 public class StringParametersValidator implements Validator<String> {
+
     @Override
-    public boolean isValid(String[] params) {
+    public void isValid(String[] params) {
         if (params.length % 2 == 0 || params.length < 3) {
-            System.out.println("Incorrect count of parameters.");
-            return false;
+            throw new InvalidParameterException("Incorrect count of parameters. There shouldn’t be an even count of parameters.");
         } else if (isHasSameParameters(params)) {
-            System.out.println("There is one or more same parameters.");
-            return false;
+            throw new InvalidParameterException("There is one or more same parameters.");
         }
-        return true;
     }
 
     private boolean isHasSameParameters(String[] params) {
