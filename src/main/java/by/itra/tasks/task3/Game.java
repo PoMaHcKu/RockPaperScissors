@@ -1,21 +1,17 @@
 package by.itra.tasks.task3;
 
-import by.itra.tasks.task3.utils.ParametersValidator;
-
-import java.security.SecureRandom;
+import by.itra.tasks.task3.process.GameProcess;
 
 public class Game {
-    public static void main(String[] args) {
-        ParametersValidator validator = new ParametersValidator();
-        if (!validator.isValid(args)) {
-            return;
-        }
 
-        String cpuSelection = args[getRandomNumber(args.length)];
+    private final GameProcess process;
+
+    public Game(String[] moves) {
+        this.process = new GameProcess(moves);
     }
 
-    private static int getRandomNumber(int bound) {
-        SecureRandom random = new SecureRandom();
-        return random.nextInt(bound);
+    public static void main(String[] args) {
+        Game game = new Game(args);
+        game.process.start();
     }
 }
