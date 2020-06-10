@@ -10,7 +10,7 @@ public class StringParametersValidator implements Validator<String> {
         if (params.length % 2 == 0 || params.length < 3) {
             throw new InvalidParameterException("Incorrect count of parameters. There shouldn’t be an even count of parameters.");
         } else if (isHasSameParameters(params)) {
-            throw new InvalidParameterException("There is one or more same parameters.");
+            throw new InvalidParameterException("There are two or more same parameters.");
         }
     }
 
