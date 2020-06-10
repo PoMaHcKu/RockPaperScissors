@@ -14,7 +14,7 @@ public class HmacCreator {
     private final static int SIZE_KEY = 16;
     private String key;
 
-    public String getHmac(String data) {
+    public String createHmac(String data) {
        return calculateHMAC(data);
     }
 
@@ -22,9 +22,9 @@ public class HmacCreator {
         return key;
     }
 
-    private void initRandomKey(int countByte) {
+    private void initRandomKey() {
         SecureRandom random = new SecureRandom();
-        byte[] seed = random.generateSeed(countByte);
+        byte[] seed = random.generateSeed(SIZE_KEY);
 
         Formatter formatter = new Formatter();
         for (byte b : seed) {
@@ -34,7 +34,7 @@ public class HmacCreator {
     }
 
     private String calculateHMAC(String data) {
-        initRandomKey(SIZE_KEY);
+        initRandomKey();
         SecretKey secretKey = new SecretKeySpec(key.getBytes(), HMAC_SHA_2_256);
         Mac mac = null;
         try {
@@ -42,7 +42,6 @@ public class HmacCreator {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-
         try {
             if (mac != null) {
                 mac.init(secretKey);
@@ -50,7 +49,10 @@ public class HmacCreator {
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         }
-        return toHexString(mac.doFinal(data.getBytes()));
+        if (mac != null) {
+            return toHexString(mac.doFinal(data.getBytes()));
+        }
+        return null;
     }
 
     private String toHexString(byte[] bytes) {
@@ -60,5 +62,4 @@ public class HmacCreator {
         }
         return formatter.toString();
     }
-
 }
